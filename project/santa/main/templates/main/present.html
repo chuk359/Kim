@@ -1,0 +1,20 @@
+{%extends 'main/base.html'%}
+{% block title%}
+Present
+{%endblock%}
+
+{% block main%}
+<h1>Your present goes to:</h1>
+{% for el in tasks%}
+    <h1>{{ el.title}}</h1>
+{% endfor%}
+</p>
+</p>
+<h2>This wish was in the letter to Secret Santa:</h2>
+{% for el in tasks%}
+    <h2>{{el.task}}</h2>
+{% endfor%}
+    </p>
+    </p>
+<h3>Happy New Year and Merry Cristmas!!!</h3>
+{%endblock%}

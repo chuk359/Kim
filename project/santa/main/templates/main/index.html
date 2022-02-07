@@ -1,0 +1,13 @@
+{%extends 'main/base.html'%}
+{% block title%}
+Secret Santa
+{%endblock%}
+
+{% block main%}
+    <h1>Secret santa glad to see you!</h1>
+    <p class="lead">This game have several rools:</p>
+    <p class="lead">1. No one should know about Secret Santa</p>
+    <p class="lead">2. Everyone player should have present from sectret santa</p>
+    <p class="lead">Do you want to take part in our game?</p>
+    <a href="{% url 'takepart'%}" class="w-100 btn btn-primary btn-lg" type="submit">Take part</a>
+{%endblock%}
