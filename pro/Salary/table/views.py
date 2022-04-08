@@ -30,7 +30,7 @@ class TableAPIList(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly, )
     pagination_class = TableAPIListPagination
     filter_backends = (django_filters.rest_framework.DjangoFilterBackend,)
-    filterset_fields = ['employment_position','parent']
+    filterset_fields = ['employment_position','сhief']
 
 class TableAPIUpdate(generics.RetrieveUpdateAPIView):
     queryset = Table.objects.all()

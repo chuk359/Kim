@@ -18,10 +18,9 @@ class Table(MPTTModel):
     )
     employment_position = models.IntegerField(choices=POSITION)
     employment_start_date = models.DateField()
-    date_added = models.DateField()
     salary = models.IntegerField()
     paid = models.IntegerField()
-    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+    сhief = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
     user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
     
     def str(self):
