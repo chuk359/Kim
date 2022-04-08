@@ -1,4 +1,5 @@
 from django.db import models
+from mptt.models import MPTTModel, TreeForeignKey
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
@@ -6,19 +7,28 @@ User = get_user_model()
  
 
 # Create your models here.
-class Table(models.Model):
-    name = models.CharField(verbose_name='ФИО', db_index=True, max_length=100)
+class Table(MPTTModel):
+    name = models.CharField(max_length=50, unique=True)
     POSITION = (
-        (1, 'Генеральный директор'),
-        (2, 'Руководитель отдела'),
-        (3, 'Руководитель подразделения'),
-        (4, 'Менеджер'),
-        (5, 'Продавец'),
+        (1, 'CEO'),
+        (2, 'Director'),
+        (3, 'Team Lead'),
+        (4, 'Manager'),
+        (5, 'Specialist'),
     )
-    position = models.IntegerField(verbose_name='Должность', choices=POSITION)
-    date = models.DateField(verbose_name='Дата приема на работу')
-    salary = models.DecimalField(verbose_name='Размер заработной платы', max_digits=10, decimal_places=2)
-    paid = models.DecimalField(verbose_name='Информация о выплаченной зарплате', max_digits=10, decimal_places=2)
+    employment_position = models.IntegerField(choices=POSITION)
+    employment_start_date = models.DateField()
+    date_added = models.DateField()
+    salary = models.IntegerField()
+    paid = models.IntegerField()
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
     user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
-   
     
+    def str(self):
+        return str(self.id) + ' Name: ' + self.name
+
+    class MPTTMeta:
+        order_insertion_by = ['name']
+    
+    def __str__(self):  
+        return self.name

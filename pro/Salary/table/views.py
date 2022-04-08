@@ -30,13 +30,13 @@ class TableAPIList(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly, )
     pagination_class = TableAPIListPagination
     filter_backends = (django_filters.rest_framework.DjangoFilterBackend,)
-    filterset_fields = ['position']
+    filterset_fields = ['employment_position','parent']
 
 class TableAPIUpdate(generics.RetrieveUpdateAPIView):
     queryset = Table.objects.all()
     serializer_class = TableSerializer
     permission_classes = (IsAuthenticated, )
-    # authentication_classes = (TokenAuthentication, )
+    authentication_classes = (TokenAuthentication, )
 
 
 class TableAPIDestroy(generics.RetrieveDestroyAPIView):
@@ -46,4 +46,4 @@ class TableAPIDestroy(generics.RetrieveDestroyAPIView):
 
     
 
-      
+
